@@ -1,7 +1,7 @@
 const config = {
   gatsby: {
     pathPrefix: '/',
-    siteUrl: '',
+    siteUrl: 'https://ddk.tools.avaloq.com',
     gaTrackingId: null,
     trailingSlash: false,
   },
