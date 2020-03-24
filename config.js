@@ -1,7 +1,7 @@
 const config = {
   gatsby: {
     pathPrefix: '/',
-    siteUrl: 'https://hasura.io',
+    siteUrl: '',
     gaTrackingId: null,
     trailingSlash: false,
   },
@@ -9,24 +9,10 @@ const config = {
     logo: 'https://graphql-engine-cdn.hasura.io/learn-hasura/assets/homepage/brand.svg',
     logoLink: 'https://hasura.io/learn/',
     title:
-      "<a href='https://hasura.io/learn/'><img class='img-responsive' src='https://graphql-engine-cdn.hasura.io/learn-hasura/assets/homepage/learn-logo.svg' alt='Learn logo' /></a>",
+      "Avaloq DDK Tutorial",
     githubUrl: 'https://github.com/hasura/gatsby-gitbook-boilerplate',
-    helpUrl: '',
+    helpUrl: 'https://ddk.tools.avaloq.com/index.html',
     tweetText: '',
-    social: `<li>
-		    <a href="https://twitter.com/hasurahq" target="_blank" rel="noopener">
-		      <div class="twitterBtn">
-		        <img src='https://graphql-engine-cdn.hasura.io/learn-hasura/assets/homepage/twitter-brands-block.svg' alt={'Discord'}/>
-		      </div>
-		    </a>
-		  </li>
-			<li>
-		    <a href="https://discordapp.com/invite/hasura" target="_blank" rel="noopener">
-		      <div class="discordBtn">
-		        <img src='https://graphql-engine-cdn.hasura.io/learn-hasura/assets/homepage/discord-brands-block.svg' alt={'Discord'}/>
-		      </div>
-		    </a>
-		  </li>`,
     links: [{ text: '', link: '' }],
     search: {
       enabled: false,
@@ -38,21 +24,23 @@ const config = {
   },
   sidebar: {
     forcedNavOrder: [
-      '/introduction', // add trailing slash if enabled above
-      '/codeblock',
+      '/index',
+      '/smalljava',
+      '/ddk',
+      '/troubleshooting',
     ],
     collapsedNav: [
-      '/codeblock', // add trailing slash if enabled above
+      '/ddk', // add trailing slash if enabled above
     ],
-    links: [{ text: 'Hasura', link: 'https://hasura.io' }],
+    links: [{ text: 'DDK Documentation', link: 'https://ddk.tools.avaloq.com/index.html' }],
     frontline: false,
-    ignoreIndex: true,
+    ignoreIndex: false,
     title:
-      "<a href='https://hasura.io/learn/'>graphql </a><div class='greenCircle'></div><a href='https://hasura.io/learn/graphql/react/introduction/'>react</a>",
+      "Avaloq DDK Tutorial",
   },
   siteMetadata: {
-    title: 'Gatsby Gitbook Boilerplate | Hasura',
-    description: 'Documentation built with mdx. Powering hasura.io/learn ',
+    title: 'Avaloq DDK Tutorial',
+    description: 'Tutorial for the Domain-Specific Language Development Kit from Avaloq',
     ogImage: null,
     docsLocation: 'https://github.com/hasura/gatsby-gitbook-boilerplate/tree/master/content',
     favicon: 'https://graphql-engine-cdn.hasura.io/img/hasura_icon_black.svg',
