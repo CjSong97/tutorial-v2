@@ -28,6 +28,7 @@ const config = {
       '/smalljava',
       '/ddk',
       '/troubleshooting',
+      '/express',
     ],
     collapsedNav: [
       

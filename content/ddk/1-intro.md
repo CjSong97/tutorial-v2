@@ -2,6 +2,8 @@
 title: "Avaloq DDK"
 metaTitle: "Avaloq DDK"
 metaDescription: "Small introduction to Avaloq DDK"
+attachments: 
+    - "./summary.jpg"
 ---
 
 # Overview of DDK
