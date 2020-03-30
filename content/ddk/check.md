@@ -1,11 +1,12 @@
 ---
-title: "Check"
-metaTitle: "Check"
+title: "Check and Validation"
+metaTitle: "Check and Validation"
 metaDescription: "Implementing SmallJava with Check"
 ---
 # Basic Check File Structure
-The simplest way to create a check file is to make a file with a .check extension in you Eclipse project
-An example check file would look like this:
+The simplest way to create a check file is to make a file with a .check extension in your Eclipse project. We'll start with a basic check file that also injects the 
+utility methods from `SmallJavaModelUtil`.
+
 
 ```javascript
 package org.example.smalljava.validation

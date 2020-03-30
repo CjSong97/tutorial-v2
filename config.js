@@ -6,11 +6,11 @@ const config = {
     trailingSlash: false,
   },
   header: {
-    logo: 'https://graphql-engine-cdn.hasura.io/learn-hasura/assets/homepage/brand.svg',
-    logoLink: 'https://hasura.io/learn/',
+    logo: '/house.png',
+    logoLink: 'https://ddk.tools.avaloq.com/index.html',
     title:
       "Avaloq DDK Tutorial",
-    githubUrl: 'https://github.com/hasura/gatsby-gitbook-boilerplate',
+    githubUrl: 'https://github.com/CjSong97/tutorial-v2',
     helpUrl: 'https://ddk.tools.avaloq.com/index.html',
     tweetText: '',
     links: [{ text: '', link: '' }],
@@ -30,7 +30,7 @@ const config = {
       '/troubleshooting',
     ],
     collapsedNav: [
-      '/ddk', // add trailing slash if enabled above
+      
     ],
     links: [{ text: 'DDK Documentation', link: 'https://ddk.tools.avaloq.com/index.html' }],
     frontline: false,

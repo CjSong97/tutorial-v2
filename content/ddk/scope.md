@@ -1,11 +1,11 @@
 ---
-title: "Scope and Linking"
+title: "Scope, Export and Scoping"
 metaTitle: "Scope and Linking"
 metaDescription: "Implementing custom scoping"
 ---
 
 # Scoping and Linking Summary
-Here is a short excerp from the book "Implementing Domain Specific Languages" about the mechanics
+Here is a short excerpt from the book "Implementing Domain Specific Languages" about the mechanics
 of cross referencing.
 
 > The overall process of cross-reference resolution, that is, the interaction between the linker and the scope provider, can be simplified as follows:
@@ -24,11 +24,14 @@ DDK. Export handles the resources which are 'exported' while scope handles
 which resources are 'imported'. This will be explained by contrasting
 how custom scoping would be done using both Xtext and DDK. Thus when implementing
 custom scoping, the Scope and Export files work hand-in-hand to both make
-resources visible in the index as well as finding the particular resources by the 
-names in the index.
+resources visible in the index as well as finding the particular resources by the (qualified) names in the index. 
 
+# Scope and Export Setup
+There is currently no way to automatically generate the stub files needed for Scope and Export. You should notice some errors from the lack of .export and .scope files when you've created your project and
+after editing the MWE2 file. Under the 
+directory `src` -> `org.example.smalljava` , please create 2 new files called `SmallJava.scope` and `SmallJava.export`. 
 
-# Basic Scope File
+### Basic Scope File
 Here is an example of a basic Scope file which could fit into the placeholder scope file we made
 to satisfy the MWE2 Error:
 
@@ -38,7 +41,9 @@ scoping org.example.smalljava.SmallJava
 import "http://ww.example.org/smalljava/SmallJava" as smalljava
 ```
 
-# Basic Export File
+Notice that you will import the Ecore model from the same directory.
+
+### Basic Export File
 Here is an example of a basic export file for the smalljava language:
 
 ```javascript
@@ -53,6 +58,9 @@ export SJClass as name {
     object-fingerprint;
 }
 ```
+
+### Export Structure
+There are 3 main sections to a `.export` file. 
 
 # Scope for Blocks
 Under the default scope provider, all variable declarations are visible in all contexts of the 

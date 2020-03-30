@@ -1,5 +1,5 @@
 ---
-title: "Format"
+title: "Format and Formatting"
 metaTitle: "Format"
 metaDescription: "Description of Format DSL"
 ---
@@ -36,8 +36,7 @@ SJBlock {
 ```
 
 # Format for Xtext
-Xtext does not automatically generate the Formatter stub files for you. To enable the 
-generation of the formatter stub, we need to add some lines to the `.mwe2` file
+Xtext does not automatically generate the Formatter2 stub files for you. This is written with the new formatting API that was introduced to Xtext as of 2.08. To enable the generation of the formatter2 stub, we need to add some lines to the `.mwe2` file.
 
 ```javascript
 formatter={

@@ -5,7 +5,7 @@ metaDescription: "This page will be used to guide the user through creating the 
 ---
 
 # SmallJava
-As Fowler strongly suggests in his book on DSLs, it is always better to start developing DSLs with a semantic model or grammar in mind. 
+As Martin Fowler strongly suggests in his book on DSLs, it is always better to start developing DSLs with a semantic model or grammar in mind. 
 We will be using a subsection of Java's capabilities and call this smaller language SmallJava to demonstrate both Xtext as well as the Avaloq DDK. 
 
 This language will not be a complete language and is a simplified version of Java.
