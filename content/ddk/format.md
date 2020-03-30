@@ -48,6 +48,21 @@ After running the `.mwe2` file as a workflow, you can find the Xtend class autom
 inside the `Abstract<MyDSL>RuntimeModule` of the language and extends the `AbstractFormatter2`
 class.
 
+Say we want to run the same rules as above:
+
+```javascript
+var BLOCK_SPACE = 4
+def dispatch void format(SJClass class, extension IFormattableDocument document) {
+    class.regionFor.keyword(";").append[lineWrap]
+}
+
+def dispatch void format(SJBlock block, extension IFormattableDocument document) {
+    block.regionFor.keyword("{").prepend[space]
+    block.regionFor.keyword("}").append[linewrap]
+}
+
+```
+
 ## More Format Rules
 For more Format rules and concepts, please refer to [this](https://ddk.tools.avaloq.com/format_guide.html) link
 from the Avaloq DDK website. 

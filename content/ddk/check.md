@@ -65,9 +65,6 @@ Continuing with checking member selections, we will now check whether a member
 selection actually refers to a field, or a method invocation actually refers to
 a method. 
 
-//(Mention the boolean method 'methodinvocation' which defaults to true)
-//(Put in dissertation i learnt about comments??)
-
 ### Xtext
 ```javascript
 public static val FIELD_SELECTION_ON_METHOD =
