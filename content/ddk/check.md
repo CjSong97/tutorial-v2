@@ -3,10 +3,20 @@ title: "Check and Validation"
 metaTitle: "Check and Validation"
 metaDescription: "Implementing SmallJava with Check"
 ---
+# Implementing Additional Features
+If you were reading through the SmallJava grammar, you would have noticed that some features of Java were left ambiguous, such as:
+- Cyclic classes being allowed
+- Return statements not terminating a block
+- 
 # Basic Check File Structure
 The simplest way to create a check file is to make a file with a .check extension in your Eclipse project. We'll start with a basic check file that also injects the 
-utility methods from `SmallJavaModelUtil`.
+utility methods from `SmallJavaModelUtil`. Start by going to the directory `org.example.smalljava` -> `src` and create a new folder called `org.example.smalljava.validation`. In this directory, we will create a file called `SmallJava.check`.
+Follow the recommendations from the Eclipse proposals and create a catalog for the check file. 
 
+### Catalog
+Every check file contains exactly one catalog which should have the same name as the check file (excluding the extension). These work together with _categories_ to group checks together for reuse.
+
+Now this check will be for the SmallJava grammar which we defined earlier. Add the following lines to the file, where the @Inject line is used to inject the utility functions we will use in conjunction with the checks:
 
 ```javascript
 package org.example.smalljava.validation
@@ -21,14 +31,16 @@ for grammar org.example.smalljava.SmallJava {
  
 ```
 
-
+To introduce the validation rule structure as well as the constrains in a check file, we will implement a check for cyclic classes in SmallJava.
 
 # Checking Cycles in Class Hierarchies
-We will write a check method to check for cyclic class hierarchies.
-By default this is accepted in the SJ parser. Under the validation package
-in org.example.smalljava.validation, create a file and name it `SmallJava.check`.
-
-Add the code below within the `for grammar org.example.smalljava.SmallJava` block.
+By default, cyclic class such as:
+```java
+class A extends C {}
+class C extends B {} 
+class B extends A{}
+```
+would be accepted in the SJ parser. Add the code below within the `for grammar org.example.smalljava.SmallJava` block.
 
 ```javascript
 /**
@@ -44,7 +56,20 @@ Add the code below within the `for grammar org.example.smalljava.SmallJava` bloc
   }
 
 ```
+Let's go through this check:
+### Check Structure
+##### Meta-data
+- `live` : describes the execution time of the check. This will be executed at run time. Other keywords are `onSave` and `onDemand`
+- `error` `YourConstraintName` : keyword `error` followed by your desired name for this constraint
+- "Class Check" : The category under which the error will be put when sorting the errors by category in the Error log
+- `message` : Keyword `message` followed by the error message 
 
+##### Constraint
+- `for SJClass c` : checks usually iteratively written for the desired EClass
+- `if...`: using the utility function classHierarchy, if there is a cyclic class
+- `issue on c` : Keyword `issue` creates the issue marker in the user interface. This terminates the control flow for this check.
+
+You can also use `Ctrl+Space` when within the `for` block and select check to create a new generic check.
 Compare this check code with an equal implementation using Xtext's validation:
 
 ```javascript

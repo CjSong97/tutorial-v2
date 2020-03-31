@@ -6,7 +6,7 @@ const config = {
     trailingSlash: false,
   },
   header: {
-    logo: '/house.png',
+    logo: '/app/bin/house.png',
     logoLink: 'https://ddk.tools.avaloq.com/index.html',
     title:
       "Avaloq DDK Tutorial",
@@ -24,7 +24,7 @@ const config = {
   },
   sidebar: {
     forcedNavOrder: [
-      '/index',
+      '/introduction',
       '/smalljava',
       '/ddk',
       '/troubleshooting',
@@ -35,7 +35,7 @@ const config = {
     ],
     links: [{ text: 'DDK Documentation', link: 'https://ddk.tools.avaloq.com/index.html' }],
     frontline: false,
-    ignoreIndex: false,
+    ignoreIndex: true,
     title:
       "Avaloq DDK Tutorial",
   },
@@ -43,8 +43,8 @@ const config = {
     title: 'Avaloq DDK Tutorial',
     description: 'Tutorial for the Domain-Specific Language Development Kit from Avaloq',
     ogImage: null,
-    docsLocation: 'https://github.com/hasura/gatsby-gitbook-boilerplate/tree/master/content',
-    favicon: 'https://graphql-engine-cdn.hasura.io/img/hasura_icon_black.svg',
+    docsLocation: 'https://ddk.tools.avaloq.com/index.html',
+    favicon: '/app/bin/house.png',
   },
   pwa: {
     enabled: false, // disabling this will also remove the existing service worker.
