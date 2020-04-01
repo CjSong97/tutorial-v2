@@ -3,7 +3,7 @@ title: "Introduction"
 ---
 
 This tutorial aims to get the user comfortable to working with the Avaloq Domain-Specific Language (DSL) Development Kit (DDK) by working through an example domain model like SmallJava and using the different DSLs available in the DDK.  We will begin by installing the Avaloq DDK and introducing the grammar models for the DSLs which will be made. 
-By writing the DSLs in both Xtext and Avaloq DDK, the user should be able to decide whether the DDK suits the users needs better than the DDK.
+By writing the DSLs in both Xtext and Avaloq DDK, the user should be able to decide whether the DDK suits the users needs better than Xtext.
 
 # Preface
 This tutorial will use material from the book "Implementing Domain-Specific Languages
@@ -76,5 +76,7 @@ opened in the current editing view. Now you should have:
 - An Eclipse with DDK plugins imported from the Github repository
 - A DDK runtime
 - A brand new Xtext project named SmallJava
+We will mostly be working in the folder called `org.example.smalljava`.
 
-You are now ready to move on to the Avaloq DDK part of this tutorial!
+
+You are now ready to start implementing your own DSL named SmallJava!

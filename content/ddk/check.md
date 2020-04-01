@@ -3,12 +3,13 @@ title: "Check and Validation"
 metaTitle: "Check and Validation"
 metaDescription: "Implementing SmallJava with Check"
 ---
-# Implementing Additional Features
+## Implementing Additional Features
 If you were reading through the SmallJava grammar, you would have noticed that some features of Java were left ambiguous, such as:
 - Cyclic classes being allowed
 - Return statements not terminating a block
-- 
-# Basic Check File Structure
+- Inheritance
+- Access level modifiers
+## Basic Check File Structure
 The simplest way to create a check file is to make a file with a .check extension in your Eclipse project. We'll start with a basic check file that also injects the 
 utility methods from `SmallJavaModelUtil`. Start by going to the directory `org.example.smalljava` -> `src` and create a new folder called `org.example.smalljava.validation`. In this directory, we will create a file called `SmallJava.check`.
 Follow the recommendations from the Eclipse proposals and create a catalog for the check file. 
@@ -33,7 +34,7 @@ for grammar org.example.smalljava.SmallJava {
 
 To introduce the validation rule structure as well as the constrains in a check file, we will implement a check for cyclic classes in SmallJava.
 
-# Checking Cycles in Class Hierarchies
+## Checking Cycles in Class Hierarchies
 By default, cyclic class such as:
 ```java
 class A extends C {}
@@ -61,15 +62,15 @@ Let's go through this check:
 ##### Meta-data
 - `live` : describes the execution time of the check. This will be executed at run time. Other keywords are `onSave` and `onDemand`
 - `error` `YourConstraintName` : keyword `error` followed by your desired name for this constraint
-- "Class Check" : The category under which the error will be put when sorting the errors by category in the Error log
+- `"Class Check"` : The category under which the error will be put when sorting the errors by category in the Error log
 - `message` : Keyword `message` followed by the error message 
 
 ##### Constraint
-- `for SJClass c` : checks usually iteratively written for the desired EClass
-- `if...`: using the utility function classHierarchy, if there is a cyclic class
+- `for SJClass c` : checks are usually iteratively written for the desired EClass
+- `if...`: using the utility function classHierarchy, if there is a cyclic class do the following
 - `issue on c` : Keyword `issue` creates the issue marker in the user interface. This terminates the control flow for this check.
 
-You can also use `Ctrl+Space` when within the `for` block and select check to create a new generic check.
+You can also use `Ctrl+Space` when within the `for` block and select `check` to create a new generic check.
 Compare this check code with an equal implementation using Xtext's validation:
 
 ```javascript
@@ -85,10 +86,27 @@ Compare this check code with an equal implementation using Xtext's validation:
 
 ```
 
-# Checking Member Selections
+## Checking Member Selections
 Continuing with checking member selections, we will now check whether a member
 selection actually refers to a field, or a method invocation actually refers to
 a method. 
+
+### DDK
+```javascript
+live error MemberSelectionCheck "Member Selection Check"
+message "Member selection error" {
+	for SJMemberSelections sel {
+		val member = sel.member
+		if (member instanceof SJField && sel.methodinvocation){
+			issue on member
+		}
+
+		else if (member instanceof SJMethod && !sel.methodinvocation){
+			issue on member
+		}
+	}
+}
+```
 
 ### Xtext
 ```javascript
@@ -118,28 +136,29 @@ public static val METHOD_INVOCATION_ON_FIELD =
 }
 ```
 
+## Checking Return Statements
+Now we will put in the appropriate error statement for unreachable code from
+code written after the return statement in a block. 
+
 ### DDK
 ```javascript
-live error MemberSelectionCheck "Member Selection Check"
-message "Member selection error" {
-	for SJMemberSelections sel {
-		val member = sel.member
-		if (member instanceof SJField && sel.methodinvocation){
-			issue on member
-		}
-
-		else if (member instanceof SJMethod && !sel.methodinvocation){
-			issue on member
+live error ReturnStatementCheck "Return Check"
+message "Unreachable Code" {
+	for SJBlock block{
+		val statements = block.statements
+		for(var i=0; i<statements.length-1; i++) {
+			if (statements.get(i) instanceof SJReturn){
+				//put error on the statement after return
+				issue on statements.get(i+1)
+				return
+			}
 		}
 	}
 }
 ```
 
-# Checking Return Statements
-Now we will put in the appropriate error statement for unreachable code from
-code written after the return statement in a block. 
-
 ### Xtext
+Contrast this with using Xtext:
 ```javascript
 public static val UNREACHABLE_CODE = ISSUE_CODE_PREFIX +
 "UnreachableCode"
@@ -159,21 +178,63 @@ public static val UNREACHABLE_CODE = ISSUE_CODE_PREFIX +
 }
 ```
 
-### DDK
-Contrast this with using Check:
+## Visibility and Accessibility
+We will now implement access level modifiers to SmallJava. This is not something we necessarily want scoping to handle as protected or private elements should still be visible to the index, just not accessible. Add the following to the SJField and SJMethod types in the grammar (SmallJava.xtext) file:
 
 ```javascript
-live error ReturnStatementCheck "Return Check"
-message "Unreachable Code" {
-	for SJBlock block{
-		val statements = block.statements
-		for(var i=0; i<statements.length-1; i++) {
-			if (statements.get(i) instanceof SJReturn){
-				//put error on the statement after return
-				issue on statements.get(i+1)
-				return
-			}
+SJField:
+ 	access=SJAccessLevel? SJTypedDeclaration ';';
+SJMethod:
+		access=SJAccessLevel? SJTypedDeclaration
+		'(' (params+=SJParameter (',' params+=SJParameter)*)? ')'
+		body=SJBlock ;
+	enum SJAccessLevel:
+ 		PRIVATE='private' | PROTECTED='protected' | PUBLIC='public';
+```
+
+We will also be writing an additional class in the package `org.example.smalljava.validation` called `SmallJavaAccessibility`:
+```javascript
+import static extension org.eclipse.xtext.EcoreUtil2.*
+class SmallJavaAccessibility {
+	@Inject extension SmallJavaTypeConformance
+
+	def isAccessibleFrom(SJMember member, EObject context) {
+	val contextClass = context.getContainerOfType(SJClass)
+	val memberClass = member.getContainerOfType(SJClass)
+	switch (contextClass) {
+	case contextClass === memberClass : true
+	case contextClass.isSubclassOf(memberClass) :
+	member.access != SJAccessLevel.PRIVATE
+	default:
+	member.access == SJAccessLevel.PUBLIC
 		}
 	}
 }
+```
+What this class does is enforce that when the classes are the same, the members can always be accessed, while in a subclass you would onle be able to access members of the superclass that are not private. In all other cases, only public member can be accessed. Now we will write a check that checks the accessibility of a referred member. By writing a check instead of a scoping rule for it, we can also provide better error messages instead of the default "couldn't resolve reference to.." message that is usually given by something out of scope.
+
+### DDK
+
+
+### Xtext
+Here is how the check would look like as a validation rule:
+```javascript
+class SmallJavaValidator extends AbstractSmallJavaValidator {
+...
+	@Inject extension SmallJavaAccessibility
+	public static val MEMBER_NOT_ACCESSIBLE =
+	ISSUE_CODE_PREFIX + "MemberNotAccessible"
+...
+	@Check
+	def void checkAccessibility(SJMemberSelection sel) {
+		val member = sel.member
+		if (member.name != null && !member.isAccessibleFrom(sel))
+			error(
+			'''The «member.access» member «member.name» is not accessible
+			here''',
+			SmallJavaPackage.eINSTANCE.SJMemberSelection_Member,
+			MEMBER_NOT_ACCESSIBLE
+			)
+	}...
+
 ```

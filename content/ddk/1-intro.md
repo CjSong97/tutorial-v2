@@ -10,7 +10,7 @@ attachments:
 DDK introduces four further DSLs that can help implement DSL implementation. These are all built using 
 Xtext and Xbase and is currently working with Xtext version 2.14. The counterparts for each DSL is also present as a feature in Xtext, making them quite comparable. Below is a quick summary of the four features:
 
-![Summary](/app/bin/summary.jpg)
+![Summary](/summary.jpg)
 
 ## Working with DDK
 Once the Mwe2 file has been edited, the correct abstract files will be auto-generated. You will have to create your own files for Check, Format, Export and Scope by:

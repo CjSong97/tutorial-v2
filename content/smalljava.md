@@ -8,7 +8,7 @@ metaDescription: "This page will be used to guide the user through creating the 
 As Martin Fowler strongly suggests in his book on DSLs, it is always better to start developing DSLs with a semantic model or grammar in mind. 
 We will be using a subsection of Java's capabilities and call this smaller language SmallJava to demonstrate both Xtext as well as the Avaloq DDK. 
 
-This language will not be a complete language and is a simplified version of Java.
+This language will not be a complete language and is a simplified version of Java. Please see the express section for further infromation about what features will be ommitted as well as a rundown of what the different grammar rules mean.
 
 # The Full Grammar
 ``` javascript
