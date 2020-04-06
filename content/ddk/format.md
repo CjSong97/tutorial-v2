@@ -50,21 +50,18 @@ Say we want to run the same rules as above:
 var BLOCK_SPACE = 4
 ...
 def dispatch void format(SJClass class, extension IFormattableDocument document) {
-    class.regionFor.keyword(";").append[lineWrap]
+    class.regionFor.keyword(";").append[newLine]
 }
 
 def dispatch void format(SJBlock block, extension IFormattableDocument document) {
     block.regionFor.keyword("{").prepend[space]
-    block.regionFor.keyword("}").append[linewrap]
+    block.regionFor.keyword("}").append[newLine]
 }
 ...
 ```
 
 ## Using Formatting
 `Ctrl+Shift+F` will automatically format your DSL according to the rules set in .format or using Formatting2 for Xtext. 
-
-## More Complex Formatting
-
 
 ## More Format Rules
 For more Format rules and concepts, please refer to [this](https://ddk.tools.avaloq.com/format_guide.html) link from the Avaloq DDK website. 

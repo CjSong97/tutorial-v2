@@ -2,24 +2,23 @@
 title: "Introduction"
 ---
 
-This tutorial aims to get the user comfortable to working with the Avaloq Domain-Specific Language (DSL) Development Kit (DDK) by working through an example domain model like SmallJava and using the different DSLs available in the DDK.  We will begin by installing the Avaloq DDK and introducing the grammar models for the DSLs which will be made. 
+This tutorial aims to get the user comfortable working with the Avaloq Domain-Specific Language (DSL) Development Kit (DDK) by working through an example domain model like SmallJava and using the different DSLs available in the DDK.  We will begin by installing the Avaloq DDK and introducing the grammar model for the DSL which will be made. 
 By writing the DSLs in both Xtext and Avaloq DDK, the user should be able to decide whether the DDK suits the users needs better than Xtext.
 
 # Preface
 This tutorial will use material from the book "Implementing Domain-Specific Languages
-with Xtext and Xtend" and assumes a lot of prior knowledge about the DSL created in this book.
+with Xtext and Xtend" and assumes a lot of prior knowledge about the DSL created in this book. This includes knowledge of the Xtext grammar language as well as using Xtend files.
 A lot of the basic features of DDK will be explained in the linked website from Avaloq at 
 the bottom of the page. For the purposes of this tutorial, the SmallJava grammar as well as other 
-utility files will be linked and should be installed as advised in the installation. If any information seems too confusing, there will be a troubleshooting section for common
-issues as well as (my attempt at) explanations of more complex concepts used in this tutorial.
+utility files will be linked and should be installed or implemented as advised in the installation. 
 
-## What should I expect by completing this tutorial?
+### What should I expect by completing this tutorial?
 You will learn the following:
 - How to build your own DSL
 - Basic understanding of the tools provided by 2 different DSL builders: Xtext and Avaloq DDK
 - A working DSL called SmallJava
 
-## How long is this tutorial?
+### How long is this tutorial?
 This tutorial should last less than two hours.
 
 # Installation
@@ -42,26 +41,40 @@ on the website. After installing Eclipse, install the _Xtext Complete SDK - vers
 
 
 
-## DDK Setup
-To begin using Avaloq DDK, please follow the following instructions carefully to ensure that all the DSLs
-are correctly installed.
+# DDK Setup
+To begin using Avaloq DDK, please follow the following instructions carefully to ensure that all the DSLs are correctly installed.
 
 ### Cloning the DDK plugins
 1. With your Eclipse open, go to File -> Import -> Git -> Projects from Git -> Next
 2. Select `URI` and click `Next`
-3. Now enter the repository's clone URI from [this link](https://github.com/CjSong97/ddk-source).
-4. Select clone all branches and click `Finish`
+3. Now enter the repository's clone URI from [this link](https://github.com/dsldevkit/dsl-devkit).
+4. Select clone all branches, proceed through the installation with the default settings making sure all the plugins are selected and `Import existing Eclipse projects` is selected and click `Finish`
 
+Once finished your workspace should have the ddk plugins installed.
+
+### Adding missing files and Changing Target Definition
+Some errors (about 1221 errors) should now appear in your Eclipse workspace which can be solved by the following:
+1. Change the current target to ddk.target by going to:
+    - `Window` -> `Preferences`
+    - `Plug-in Development` -> `Target Platform`
+    - Select `DDK Target`
+
+2. Download `antlr-generator-3.2.0-patch.jar` from this link: http://download.itemis.com/antlr-generator-3.2.0-patch.jar and place it in the relevant folders which are:
+    - `com.avaloq.tools.ddk.sample.helloworld`
+    - `com.avaloq.tools.ddk.workflow`
+
+Now all the errors should be resolved and you should be able to run the DDK according to the following section.
 
 ### DDK Runtime
 Once the DDK plugins have been successfully cloned, proceeed to click on `Run` -> `Run History` -> `devkit-run` and you should eventually 
-find another Eclipse (Neon) instance runnning in another window. In this Eclipse instance is where we will be building our DSL using the Avaloq DDK.
+find another Eclipse (Neon) instance runnning in another window called runtime-devkit. This Eclipse instance is where we will be building our DSL using the Avaloq DDK.
 I will refer to this instance as the DDK runtime.
 
-//(perhaps place links to sections in the troubleshooting to explain the difficult concepts like mwe2 editing and explain what mwe2 does)
+//(perhaps place links to sections in the troubleshooting to explain the difficult 
+//concepts like mwe2 editing and explain what mwe2 does)
 
 ### Making your SmallJava Project
-To demonstrate the Avaloq DDK, we will need to create an Xtext project to make our SmallJava DSL. Follow the steps below to create a new 
+To demonstrate the Avaloq DDK, we will need to create an Xtext project to make our SmallJava DSL in the DDK runtime. Follow the steps below to create a new 
 Xtext project for SmallJava.
 
 1. In the DDK runtime, navigate to `File` -> `New` -> `Project` -> `Xtext` and click on `Xtext Project`
@@ -71,12 +84,12 @@ Xtext project for SmallJava.
     - Extensions: smalljava
 3. Click `Finish`
 
-Allow the project wizard to run and it will create 5 different projects in your workspace. Once finished you should see the `SmallJava.xtext` file
-opened in the current editing view. Now you should have:
+Once the project wizard is finished it will create 5 different projects in your workspace. You should see the `SmallJava.xtext` file
+opened in the current editor view. Now you should have:
 - An Eclipse with DDK plugins imported from the Github repository
 - A DDK runtime
 - A brand new Xtext project named SmallJava
+
+
 We will mostly be working in the folder called `org.example.smalljava`.
-
-
 You are now ready to start implementing your own DSL named SmallJava!
