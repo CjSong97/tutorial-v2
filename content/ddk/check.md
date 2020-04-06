@@ -13,8 +13,8 @@ If you were reading through the SmallJava grammar, you would have noticed that s
 We will now begin implementing some of these missing features using the various tools from DDK as well as looking at a similar approach using Xtext.
 
 ## SmallJavaModelUtil
-We will also be using the helper methods from this class to aid in fully implementing
-SmallJava. These methods will mainly be concerned with the Check files. Create a new Xtend class in the `src/org.example.smalljava` package and name it `SmallJavaModelUtil`. Then, add in the code below:
+We will be using the helper methods from this class to aid in fully implementing
+SmallJava. These methods will mainly be concerned with the Check file. Create a new Xtend class in the `src/org.example.smalljava` package and name it `SmallJavaModelUtil`. Then, add in the code below:
 
 
 ```javascript
@@ -66,7 +66,7 @@ utility methods from `SmallJavaModelUtil`. Start by going to the directory `org.
 Follow the recommendations from the Eclipse proposals and create a catalog for the check file. 
 
 ### Catalog
-Every check file contains exactly one catalog which should have the same name as the check file (excluding the extension). These work together with _categories_ to group checks together for reuse.
+Every check file contains exactly one **catalog** which should have the same name as the check file (excluding the extension). These work together with **categories** to group checks together for reuse.
 
 Now this check will be for the SmallJava grammar which we defined earlier. Add the following lines to the file, where the `@Inject` line is used to inject the utility functions we made earlier to use in conjunction with the checks:
 

@@ -31,12 +31,12 @@ instructions below:
 
 ### Eclipse Setup
 Avaloq DDK is tested to be compatible with Eclipse Oxygen. Download Eclipse from this [link](https://www.eclipse.org/oxygen/) and follow the instructions
-on the website. After installing Eclipse, install the _Xtext Complete SDK - version 2.14_ in Eclipse. This can be done by:
+on the website. After installing Eclipse, install the _Xtext Complete SDK - version 2.14_  in Eclipse. This can be done by:
 
 1. Going to `Help` -> `Install New Software`
 2. Copy [this link](http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/) and paste it into the `Work with:` box -> click `Add`
 3. Once added, uncheck the `Show only the latest version of available software` box
-4. Under Xtext, find `Xtext Complete SDK 2.14` -> Click `Finish`
+4. Under Xtext, find `Xtext Complete SDK` version 2.14 -> Click `Finish`
 5. You should now have installed Xtext
 
 
@@ -50,10 +50,13 @@ To begin using Avaloq DDK, please follow the following instructions carefully to
 3. Now enter the repository's clone URI from [this link](https://github.com/dsldevkit/dsl-devkit).
 4. Select clone all branches, proceed through the installation with the default settings making sure all the plugins are selected and `Import existing Eclipse projects` is selected and click `Finish`
 
-Once finished your workspace should have the ddk plugins installed.
+Once finished your workspace should have the ddk plugins installed. It should look something like this:
+
+<img src="/app/bin/public/workspace.jpg" alt="Image of Workspace"/>
 
 ### Adding missing files and Changing Target Definition
 Some errors (about 1221 errors) should now appear in your Eclipse workspace which can be solved by the following:
+
 1. Change the current target to ddk.target by going to:
     - `Window` -> `Preferences`
     - `Plug-in Development` -> `Target Platform`
@@ -66,7 +69,7 @@ Some errors (about 1221 errors) should now appear in your Eclipse workspace whic
 Now all the errors should be resolved and you should be able to run the DDK according to the following section.
 
 ### DDK Runtime
-Once the DDK plugins have been successfully cloned, proceeed to click on `Run` -> `Run History` -> `devkit-run` and you should eventually 
+Once the DDK plugins have been successfully cloned, click on `Run` -> `Run History` -> `devkit-run` and you should eventually 
 find another Eclipse (Neon) instance runnning in another window called runtime-devkit. This Eclipse instance is where we will be building our DSL using the Avaloq DDK.
 I will refer to this instance as the DDK runtime.
 
