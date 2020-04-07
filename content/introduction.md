@@ -73,9 +73,6 @@ Once the DDK plugins have been successfully cloned, click on `Run` -> `Run Histo
 find another Eclipse (Neon) instance runnning in another window called runtime-devkit. This Eclipse instance is where we will be building our DSL using the Avaloq DDK.
 I will refer to this instance as the DDK runtime.
 
-//(perhaps place links to sections in the troubleshooting to explain the difficult 
-//concepts like mwe2 editing and explain what mwe2 does)
-
 ### Making your SmallJava Project
 To demonstrate the Avaloq DDK, we will need to create an Xtext project to make our SmallJava DSL in the DDK runtime. Follow the steps below to create a new 
 Xtext project for SmallJava.
