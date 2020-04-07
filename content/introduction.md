@@ -52,7 +52,7 @@ To begin using Avaloq DDK, please follow the following instructions carefully to
 
 Once finished your workspace should have the ddk plugins installed. It should look something like this:
 
-<img src="/app/bin/public/workspace.jpg" alt="Image of Workspace"/>
+<img src="../public/workspace.jpg" alt="Image of Workspace"/>
 
 ### Adding missing files and Changing Target Definition
 Some errors (about 1221 errors) should now appear in your Eclipse workspace which can be solved by the following:
