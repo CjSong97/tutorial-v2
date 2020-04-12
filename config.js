@@ -44,7 +44,7 @@ const config = {
     description: 'Tutorial for the Domain-Specific Language Development Kit from Avaloq',
     ogImage: null,
     docsLocation: 'https://ddk.tools.avaloq.com/index.html',
-    favicon: '/app/bin/house.png',
+    favicon: '../house.png',
   },
   pwa: {
     enabled: false, // disabling this will also remove the existing service worker.

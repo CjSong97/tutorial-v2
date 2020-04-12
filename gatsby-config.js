@@ -20,6 +20,12 @@ const plugins = [
     }
   },
   {
+    resolve: "gatsby-source-filesystem",
+    options: {
+      path: `${__dirname}/src`
+    }
+  },
+  {
     resolve: 'gatsby-plugin-mdx',
     options: {
       gatsbyRemarkPlugins: [
