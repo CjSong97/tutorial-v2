@@ -58,17 +58,17 @@ class SmallJavaModelUtil {
 }
 ```
 
-For now, you can think of these utility methods as simple getters for the fields we'll need to implement for checking properties later.
+For now, you can think of these utility methods as simple getters for the fields we'll need to implement for checking properties later. There is also a helper function for checking for cyclic classes which we will now implement.
 
 ## Basic Check File Structure
-The simplest way to create a check file is to make a file with a .check extension in your Eclipse project. We'll start with a basic check file that also injects the 
+The simplest way to create a Check file is to make a file with a .check extension in your Eclipse project. We'll start with a basic Check file that also injects the 
 utility methods from `SmallJavaModelUtil`. Start by going to the directory `org.example.smalljava` -> `src` -> `org.example.smalljava.validation`. In this directory, we will create a general file called `SmallJava.check`.
-Follow the recommendations from the Eclipse proposals and create a catalog for the check file. 
+Follow the recommendations from the Eclipse proposals and create a catalog for the check file.
 
 ### Catalog
-Every check file contains exactly one **catalog** which should have the same name as the check file (excluding the extension). These work together with **categories** to group checks together for reuse.
+Every Check file contains exactly one **catalog** which should have the same name as the Check file (excluding the extension). These work together with **categories** to group Checks together for reuse.
 
-Now this check will be for the SmallJava grammar which we defined earlier. Add the following lines to the file, where the `@Inject` line is used to inject the utility functions we made earlier to use in conjunction with the checks:
+Now this Check will be used for the SmallJava grammar which we defined earlier. Add the following lines to the file, where the `@Inject` line is used to inject the utility functions we made earlier to use in conjunction with the checks:
 
 ```javascript
 package org.example.smalljava.validation
@@ -86,14 +86,14 @@ for grammar org.example.smalljava.SmallJava {
 }
 ```
 
-Within the for loop is where we will add our Check **context** and **contraints**. I'll demonstrate how the context and contraints are structured by implementing a check for cyclic classes.
+Within the for loop is where we will add our Check **context** and **contraints**. I'll demonstrate how the context and contraints are structured by implementing a Check for cyclic classes.
 
 ## Checking Cycles in Class Hierarchies
 By default, cyclic class such as:
 ```java
 class A extends C {}
 class C extends B {} 
-class B extends A{}
+class B extends A {}
 ```
 would be accepted in the SJ parser. Add the code below within the `for grammar org.example.smalljava.SmallJava` block.
 
@@ -112,21 +112,21 @@ would be accepted in the SJ parser. Add the code below within the `for grammar o
   }
 
 ```
-Let's go through this check:
+Let's go through this Check:
 ### Check Structure
 ##### Meta-data (Context)
-- `live` : describes the execution time of the check. This will be executed at run time. Other keywords are `onSave` and `onDemand`
-- `error` `YourConstraintName` : keyword `error` followed by your desired name for this constraint
+- `live` : describes the execution time of the Check. This will be executed at run time. Other keywords are `onSave` and `onDemand`
+- `error` `"YourConstraintName"` : keyword `error` followed by your desired name for this constraint
 - `"Class Check"` : The category under which the error will be put when sorting the errors by category in the Error log
 - `message` : Keyword `message` followed by the error message 
 
 ##### Constraint
-- `for SJClass c` : checks are usually iteratively written for the desired EClass
+- `for SJClass c` : Checks are usually iteratively written for the desired EClass
 - `if...`: using the utility function classHierarchy, if there is a cyclic class do the following
-- `issue on c` : Keyword `issue` creates the issue marker in the user interface. This terminates the control flow for this check.
+- `issue on c` : Keyword `issue` creates the issue marker in the user interface. This terminates the control flow for this Check.
 
-You can also use `Ctrl+Space` when within the `for` block and select `check` to create a new generic check.
-Compare this check code with an equal implementation using Xtext's validation:
+You can also use `Ctrl+Space` when within the `for` block and select `Check` to create a new generic Check.
+Compare this Check code with an equal implementation using Xtext's validation:
 
 ```javascript
 @Check def checkClassHierarchy (SJClass c) {
@@ -163,7 +163,7 @@ message "Member selection error" {
 }
 ```
 
-We can access fields of Eclasses just as we could in Xtext as seen in `sel.member`. 
+We can access fields of EClasses just as we could in Xtext using `sel.member`. 
 
 ### Xtext
 ```javascript
@@ -269,7 +269,7 @@ class SmallJavaAccessibility {
 	}
 }
 ```
-What this class does is enforce that when the classes are the same, the members can always be accessed, while in a subclass you would onle be able to access members of the superclass that are not private. In all other cases, only public member can be accessed. Now we will write a check that checks the accessibility of a referred member. By writing a check instead of a scoping rule for it, we can also provide better error messages instead of the default "couldn't resolve reference to.." message that is usually given by something out of scope.
+What this class does is enforce that when the classes are the same, the members can always be accessed, while in a subclass you would only be able to access members of the superclass that are not private. In all other cases, only public members can be accessed. Now we will write a Check that checks the accessibility of a referred member. By writing a check instead of a scoping rule for it, we can also provide better error messages instead of the default "couldn't resolve reference to.." message that is usually given by something out of scope.
 
 ### DDK
 ```javascript
@@ -287,7 +287,7 @@ message "The Member can't be accessed here" {
 
 
 ### Xtext
-Here is how the check would look like as a validation rule:
+Here is how the check would look like as a Validation rule:
 ```javascript
 class SmallJavaValidator extends AbstractSmallJavaValidator {
 ...

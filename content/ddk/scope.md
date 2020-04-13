@@ -43,7 +43,7 @@ There are 3 main parts to a Scope file.
 This is where the Xtext grammar a Scope file is written against should be put, in this case it is `scoping org.example.smalljava.SmallJava`. We also place the generated meta model from our grammar here. It is possible to reference other meta models and any models referred in the Scope file must be imported. In our import we have also defined an alias `as smalljava` for easier referencing. 
 A Scope file can also include definitions contained by other scope files. One could reuse the scoping defined for a base grammar in a derived grammar. This is done using the keyword `with` similarly to Xtext and must be visible in the classpath. The DSL also supports Xtend expressions using the keyword `extension` and normal Xtend syntax. These extensions need to be visible in the classpath as well.
 
-##### (Optional) Default naming
+#### (Optional) Default naming
 This can be used for defining:
 - The default case sensitivity for scopes (Case sensitive being default)
 - Default naming definitions that apply to all scope rules. These are only used if no other, more specific naming rules are defined by the scope rules. 
@@ -54,7 +54,7 @@ case sensitive naming {
   smalljava::SJSymbol = this.name;
 }
 ```
-##### (Optional) Scope Definitions
+#### (Optional) Scope Definitions
 States which elements are part of a scope in a given context. This can be considered similar to the method `getScope` in the Xtext file.
 
 
@@ -62,16 +62,16 @@ States which elements are part of a scope in a given context. This can be consid
 The name of the export file must correspond to the name of the Xtext grammar, which is why we called the file `SmallJava.export` earlier.
 There are 3 main sections to a `.export` file. 
 
-##### Header
+#### Header
 At the top of the file, we will usually import the meta model from the grammar of the DSL. Here, it is `import "http://www.example.org/smalljava/SmallJava"` using the namespace URI and we can add the optional alias `as smalljava` for easier referencing. For example, we can refer to the types from this model  (like SJClass) as `smalljava::SJClass`.
 Xtend extensions can be imported using the expression:
 `extension org::example::smalljava::SmallJavaModelUtil`.
 Please note that there is a limitation in the Xtend to Java expression compiler, so only static JAVA extensions defined in the imported Xtend files can be used. 
 
-##### Interface 
+#### Interface 
 This defines exactly what pieces of information are semantically relevant to clients referencing a particular object. This essentially covers what objects need to be re-evaluated should a particular resource change. In our basic example, we have our EClass - SJClass and only the name is exported.
 
-##### Export
+#### Export
 This section specifies which objects should be exported and what details to attach to them. In the basic file, we export any `SJClass` as `name`. DDK does not use the same index mechanism as Xtext, instead storing all exported objects (interface items) as a hash and this is referred to as the _fingerprint_. It is stored as a [user data field in the index for the exported objects it pertains to](https://ddk.tools.avaloq.com/export.html). Thus, the keyword `object-fingerprint` is used to export the interface item SJClass.
 
 ## Scope for Blocks
@@ -150,10 +150,10 @@ export lookup SJClass as name {
 
 Let's go through this section-by-section again:
 
-##### Interface
+#### Interface
 Here we've added the other resources to be exported into the index. As before, we exported the names of most of them, called a **Value Expression**. In the case of SJBlock, we have exported the **Reference Expression** using the `@`. This includes all interfae items of the referenced object. There is another interface keyword called `eval` for **Generic Expression** which is not used.
 
-##### Export
+#### Export
 We are exporting all of these resources mainly for data exports and won't need to be looked up in the index for index queries. By default, the name of every exported object is qualified and so we can just export these resources as `name`.
 
 ### Utility Functions
@@ -199,7 +199,7 @@ What these files do is essentially the role of the function `scopeForSymbolRef` 
 ### Scope
 Let's handle the implementation like in Export, section-by-section
 
-##### Header
+#### Header
 To add the functionality of `scopeForSymbolRef`,  we will add our Xtend file `SmallJavaScoping` as an extension to the Scope and also utility methods from Ecore. This can be done with the following:
 
 ```javascript
@@ -208,7 +208,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 extension org::example::smalljava::SmallJavaScoping
 ...
 ```
-##### Naming
+#### Naming
 Next, we will provide a naming scheme for SJSymbol using its `name` attribute.
 
 ```javascript
@@ -216,7 +216,7 @@ case sensitive naming {
   smalljava::SJSymbol = this.name;
 }
 ```
-##### Scope Definitions
+#### Scope Definitions
 Now we can define our Scope method as well as the general Scope rule. First, we define a Scope rule which returns the SJSymbol, the "end product" or innermost container which we are after in the index. 
 
 ```javascript

@@ -44,7 +44,7 @@ formatter={
 
 After running the `.mwe2` file as a workflow, you can find the Xtend class automatically in the directory `org.example.smalljava.formatting2.SmallJavaFormatter`.
 
-Say we want to run the same rules as above:
+Say we want to run the same rules as above using Formatter2:
 
 ```javascript
 var BLOCK_SPACE = 4
