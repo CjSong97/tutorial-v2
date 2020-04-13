@@ -30,8 +30,7 @@ for now you will have to install the DDK as plugins from an outside repository i
 instructions below:
 
 ### Eclipse Setup
-Avaloq DDK is tested to be compatible with Eclipse Oxygen. Download Eclipse Oxygen from this [link](https://www.eclipse.org/oxygen/) and follow the instructions
-on the website. After installing Eclipse, install the _Xtext Complete SDK - version 2.14_  in Eclipse. This can be done by:
+Avaloq DDK is tested to be compatible with Eclipse Oxygen for Java Developers. Download Eclipse Oxygen from this [link](https://www.eclipse.org/downloads/packages/release/oxygen/3a) and download the appropriate distribution. After installing Eclipse, install the _Xtext Complete SDK - version 2.14_  in Eclipse. This can be done by:
 
 1. Going to `Help` -> `Install New Software`
 2. Copy [this link](http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/) and paste it into the `Work with:` box -> click `Add`
