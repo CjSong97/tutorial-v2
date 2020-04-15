@@ -5,7 +5,7 @@ metaDescription: "Implementing SmallJava with Check"
 ---
 ## Implementing Additional Features
 If you were reading through the SmallJava grammar, you would have noticed that some features of Java were left ambiguous, such as:
-- Cyclic classes being allowed
+- Cyclic inheritance being allowed
 - Return statements not terminating a block
 - Inheritance
 - Access level modifiers

@@ -6,7 +6,7 @@ const config = {
     trailingSlash: false,
   },
   header: {
-    logo: '../src/house.png',
+    logo: 'src/house.png',
     logoLink: 'https://ddk.tools.avaloq.com/index.html',
     title:
       "Avaloq DDK Tutorial",
