@@ -1,6 +1,9 @@
 # Avaloq DDK Tutorial
 This is a repository containing a tutorial for the Avaloq DSL Developer Kit. This tutorial will cover some basics of building a DSL with DDK using all 4 languages available through the DDK. 
 
+# Tutorial Link
+The tutorial is currently available at this link for easier access: http://test-ddk-prod.herokuapp.com/
+
 # Using the tutorial
 The tutorial can be used by any machine with NodeJS and npm installed. Once installed, run the following commands in a terminal:
 ```
